@@ -1,0 +1,68 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+  background: radial-gradient(circle at 50% 150px, hsl(222deg 50% 25%) 5%, hsl(222deg 50% 10%));
+  color: hsl(222deg 50% 95%);
+  min-block-size: 100dvh;
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+header,
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  inline-size: min(1080px, 100% - 16px);
+  margin-inline: auto;
+}
+
+input {
+  display: block;
+  background: hsl(222deg 50% 95%);
+  color: hsl(222deg 50% 10%);
+  inline-size: 4rem;
+  block-size: 4rem;
+  margin-inline: auto;
+  padding: 4px 8px 10px 7px;
+  border-radius: 4px;
+  border: none;
+  font-size: 3rem;
+  transition: filter 800ms;
+}
+
+input:hover,
+input:focus-within {
+  filter: drop-shadow(0 0 8px hsl(222deg 50% 50%));
+  transition: filter 400ms;
+}
+
+footer {
+  margin-block: 8px;
+}
+
+a {
+  line-height: 0;
+  background: hsl(222deg 50% 30%);
+  color: hsl(222deg 50% 95%);
+  padding: 12px;
+  border-radius: 24px;
+  transition: filter 800ms;
+}
+
+a:hover,
+a:focus-within {
+  filter: brightness(120%);
+  transition: filter 400ms;
+}
+
+a>svg {
+  transition: transform 600ms;
+}
+
+:is(a:hover, a:focus-within)>svg {
+  transform: translateY(-2px);
+  transition: transform 200ms;
+}
