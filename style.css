@@ -26,11 +26,21 @@ input {
   inline-size: 4rem;
   block-size: 4rem;
   margin-inline: auto;
+  margin-block-end: 8px;
   padding: 4px 8px 10px 7px;
   border-radius: 4px;
   border: none;
   font-size: 3rem;
   transition: filter 800ms;
+}
+
+div#visualizations {
+  inline-size: fit-content;
+  margin-inline: auto;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 input:hover,
@@ -65,4 +75,24 @@ a>svg {
 :is(a:hover, a:focus-within)>svg {
   transform: translateY(-2px);
   transition: transform 200ms;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
