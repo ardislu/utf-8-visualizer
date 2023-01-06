@@ -40,8 +40,9 @@ function calculateOutput(input) {
 
 function parseBytes(bytes) {
   // A UTF-8 encoded code point with a byte length of 1 is always encoded with this pattern: 0xxxxxxx
+  // Do not mark first bit insignificant because the UTF-8 encoding is exactly equal to the code point binary
   if (bytes.length === 1) {
-    return `<span class="insignificant">0</span><span class="significant">${bytes[0].substring(2)}</span>`;
+    return `<span class="significant">${bytes[0]}</span>`;
   }
 
   // All other UTF-8 byte lengths follow the same pattern
