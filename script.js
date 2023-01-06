@@ -31,11 +31,40 @@ function calculateOutput(input) {
       char: invisibleCharacters.includes(point) ? '◌' : char, // Visual representation of the code point, replacing whitespace with ◌
       point: `U+${pointHex.toUpperCase()}`, // Unicode code point, in hex
       pointBinary: pointBinary.padStart(8 * Math.ceil(pointBinary.length / 8), '0'), // Unicode code point, in binary
-      bytes: [...encoder.encode(char)].map(c => c.toString(2).padStart(8, '0')).join(' ') // UTF-8 encoding of the code point, in binary
+      bytes: [...encoder.encode(char)].map(c => c.toString(2).padStart(8, '0')) // UTF-8 encoding of the code point, in binary
     });
   }
 
   return output;
+}
+
+function parseBytes(bytes) {
+  switch (bytes.length) {
+    // UTF-8 byte length of 1 is always encoded with this pattern: 0xxxxxxx
+    case 1:
+      return `<span class="insignificant">0</span><span class="significant">${bytes[0].substring(2)}</span>`;
+
+    // All other lengths follow the same pattern
+    // Examples: 
+    // - For 3 bytes: 1110xxxx 10xxxxxx 10xxxxxx
+    // - For 4 bytes: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+    default:
+      let template = '';
+
+      // The number of insignificant bits in the first byte are always the length of the array plus one 0
+      const initialLength = bytes.length;
+      const firstByte = bytes.shift();
+      template += `<span class="insignificant">${firstByte.substring(0, initialLength + 1)}</span>`;
+      template += `<span class="significant">${firstByte.substring(initialLength + 1)}</span>`;
+
+      // Remaining bytes always have 2 insignificant bits
+      for (const byte of bytes) {
+        template += `<span class="insignificant">10</span>`;
+        template += `<span class="significant">${byte.substring(2)}</span>`;
+      }
+
+      return template;
+  }
 }
 
 function render(output) {
@@ -47,7 +76,7 @@ function render(output) {
     viz.insertAdjacentHTML('beforeend', `<span slot="char">${item.char}</slot>`);
     viz.insertAdjacentHTML('beforeend', `<span slot="point">${item.point}</slot>`);
     viz.insertAdjacentHTML('beforeend', `<span slot="point-binary">${item.pointBinary}</slot>`);
-    viz.insertAdjacentHTML('beforeend', `<span slot="bytes">${item.bytes}</slot>`);
+    viz.insertAdjacentHTML('beforeend', `<span slot="bytes">${parseBytes(item.bytes)}</slot>`);
 
     vizContainer.insertAdjacentElement('beforeend', viz);
   }

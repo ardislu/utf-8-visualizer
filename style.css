@@ -77,6 +77,16 @@ a>svg {
   transition: transform 200ms;
 }
 
+/* For the raw UTF-8 bytes */
+.insignificant {
+  transition: opacity 600ms;
+}
+
+:is(al-point-visualization:hover, al-point-visualization:focus-within) .insignificant {
+  opacity: 20%;
+  transition: opacity 200ms;
+}
+
 @keyframes slideIn {
   from {
     transform: translateY(-100%);
