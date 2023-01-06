@@ -39,31 +39,32 @@ function calculateOutput(input) {
 }
 
 function parseBytes(bytes) {
-  switch (bytes.length) {
-    // UTF-8 byte length of 1 is always encoded with this pattern: 0xxxxxxx
-    case 1:
-      return `<span class="insignificant">0</span><span class="significant">${bytes[0].substring(2)}</span>`;
+  // A UTF-8 encoded code point with a byte length of 1 is always encoded with this pattern: 0xxxxxxx
+  if (bytes.length === 1) {
+    return `<span class="insignificant">0</span><span class="significant">${bytes[0].substring(2)}</span>`;
+  }
 
-    // All other lengths follow the same pattern
-    // Examples: 
-    // - For 3 bytes: 1110xxxx 10xxxxxx 10xxxxxx
-    // - For 4 bytes: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
-    default:
-      let template = '';
+  // All other UTF-8 byte lengths follow the same pattern
+  // Examples: 
+  // Length = 3 bytes: 1110xxxx 10xxxxxx 10xxxxxx
+  // Length = 4 bytes: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+  // Length = 5 bytes: 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+  else {
+    let template = '';
 
-      // The number of insignificant bits in the first byte are always the length of the array plus one 0
-      const initialLength = bytes.length;
-      const firstByte = bytes.shift();
-      template += `<span class="insignificant">${firstByte.substring(0, initialLength + 1)}</span>`;
-      template += `<span class="significant">${firstByte.substring(initialLength + 1)}</span>`;
+    // The number of insignificant bits in the first byte is always the length of the array plus one
+    const initialLength = bytes.length;
+    const firstByte = bytes.shift();
+    template += `<span class="insignificant">${firstByte.substring(0, initialLength + 1)}</span>`;
+    template += `<span class="significant">${firstByte.substring(initialLength + 1)}</span>`;
 
-      // Remaining bytes always have 2 insignificant bits
-      for (const byte of bytes) {
-        template += `<span class="insignificant">10</span>`;
-        template += `<span class="significant">${byte.substring(2)}</span>`;
-      }
+    // Remaining bytes always have 2 insignificant bits
+    for (const byte of bytes) {
+      template += `<span class="insignificant">10</span>`;
+      template += `<span class="significant">${byte.substring(2)}</span>`;
+    }
 
-      return template;
+    return template;
   }
 }
 
