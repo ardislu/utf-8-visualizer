@@ -48,6 +48,13 @@
         border-radius: 4px;
         padding: 4px;
         animation: 800ms fadeIn both;
+        transition: filter 800ms;
+      }
+
+      :host(:hover),
+      :host(:focus-within) {
+        filter: drop-shadow(0 0 4px hsl(222deg 50% 50%));
+        transition: filter 400ms;
       }
 
       ::slotted(*) {

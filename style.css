@@ -64,7 +64,7 @@ a {
 
 a:hover,
 a:focus-within {
-  filter: brightness(120%);
+  filter: brightness(120%) drop-shadow(0 0 4px hsl(222deg 50% 50%));
   transition: filter 400ms;
 }
 
