@@ -14,6 +14,10 @@ footer {
   justify-content: center;
 }
 
+footer {
+  margin-block: 8px;
+}
+
 main {
   inline-size: min(1080px, 100% - 16px);
   margin-inline: auto;
@@ -34,6 +38,12 @@ input {
   transition: filter 800ms;
 }
 
+input:hover,
+input:focus-within {
+  filter: drop-shadow(0 0 8px hsl(222deg 50% 50%));
+  transition: filter 400ms;
+}
+
 div#visualizations {
   inline-size: fit-content;
   margin-inline: auto;
@@ -41,16 +51,6 @@ div#visualizations {
   gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-input:hover,
-input:focus-within {
-  filter: drop-shadow(0 0 8px hsl(222deg 50% 50%));
-  transition: filter 400ms;
-}
-
-footer {
-  margin-block: 8px;
 }
 
 a {
@@ -87,6 +87,7 @@ a>svg {
   transition: opacity 200ms;
 }
 
+/* These keyframes are used in the al-point-visualization template styling, but must be declared globally */
 @keyframes slideIn {
   from {
     transform: translateY(-100%);
