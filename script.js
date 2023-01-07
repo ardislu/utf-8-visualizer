@@ -25,12 +25,10 @@ function calculateOutput(input) {
   for (const char of input) {
     const point = char.codePointAt(0);
     const pointHex = point.toString(16);
-    const pointBinary = point.toString(2);
 
     output.push({
       char: invisibleCharacters.includes(point) ? '◌' : char, // Visual representation of the code point, replacing whitespace with ◌
       point: `U+${pointHex.toUpperCase()}`, // Unicode code point, in hex
-      pointBinary: pointBinary.padStart(8 * Math.ceil(pointBinary.length / 8), '0'), // Unicode code point, in binary
       bytes: [...encoder.encode(char)].map(c => c.toString(2).padStart(8, '0')) // UTF-8 encoding of the code point, in binary
     });
   }
@@ -42,7 +40,7 @@ function parseBytes(bytes) {
   // A UTF-8 encoded code point with a byte length of 1 is always encoded with this pattern: 0xxxxxxx
   // Do not mark first bit insignificant because the UTF-8 encoding is exactly equal to the code point binary
   if (bytes.length === 1) {
-    return `<span class="significant">${bytes[0]}</span>`;
+    return [bytes[0], bytes[0]];
   }
 
   // All other UTF-8 byte lengths follow the same pattern
@@ -51,21 +49,24 @@ function parseBytes(bytes) {
   // Length = 4 bytes: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
   // Length = 5 bytes: 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
   else {
-    let template = '';
+    let pointBinaryTemplate = '';
+    let bytesTemplate = '';
 
     // The number of insignificant bits in the first byte is always the length of the array plus one
     const initialLength = bytes.length;
     const firstByte = bytes.shift();
-    template += `<span class="insignificant">${firstByte.substring(0, initialLength + 1)}</span>`;
-    template += `<span class="significant">${firstByte.substring(initialLength + 1)}</span>`;
+    const i = firstByte.substring(0, initialLength + 1);
+    const s = firstByte.substring(initialLength + 1);
+    pointBinaryTemplate += `<span class="shrink w-${i.length}"></span>${s}`;
+    bytesTemplate += `<span class="insignificant">${i}</span>${s}`;
 
     // Remaining bytes always have 2 insignificant bits
     for (const byte of bytes) {
-      template += `<span class="insignificant">10</span>`;
-      template += `<span class="significant">${byte.substring(2)}</span>`;
+      pointBinaryTemplate += `<span class="shrink w-2"></span>${byte.substring(2)}`;
+      bytesTemplate += `<span class="insignificant">10</span>${byte.substring(2)}`;
     }
 
-    return template;
+    return [pointBinaryTemplate, bytesTemplate];
   }
 }
 
@@ -77,8 +78,10 @@ function render(output) {
     const viz = document.createElement('al-point-visualization');
     viz.insertAdjacentHTML('beforeend', `<span slot="char">${item.char}</slot>`);
     viz.insertAdjacentHTML('beforeend', `<span slot="point">${item.point}</slot>`);
-    viz.insertAdjacentHTML('beforeend', `<span slot="point-binary">${item.pointBinary}</slot>`);
-    viz.insertAdjacentHTML('beforeend', `<span slot="bytes">${parseBytes(item.bytes)}</slot>`);
+
+    const [pointBinary, bytes] = parseBytes(item.bytes);
+    viz.insertAdjacentHTML('beforeend', `<span slot="point-binary">${pointBinary}</slot>`);
+    viz.insertAdjacentHTML('beforeend', `<span slot="bytes">${bytes}</slot>`);
 
     vizContainer.insertAdjacentElement('beforeend', viz);
   }

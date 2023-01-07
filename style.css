@@ -77,6 +77,41 @@ a>svg {
   transition: transform 200ms;
 }
 
+/* For the point binary */
+.shrink {
+  display: inline-block;
+  inline-size: 0;
+  line-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: inline-size 600ms;
+}
+
+:is(al-point-visualization:hover, al-point-visualization:focus-within) .shrink {
+  transition: inline-size 200ms;
+}
+
+/* Can't use inline-size: fit-content or inline-size: auto, must hardcode a concrete size for transition to work. */
+:is(al-point-visualization:hover, al-point-visualization:focus-within) .shrink.w-2 {
+  inline-size: 2ch;
+}
+
+:is(al-point-visualization:hover, al-point-visualization:focus-within) .shrink.w-3 {
+  inline-size: 3ch;
+}
+
+:is(al-point-visualization:hover, al-point-visualization:focus-within) .shrink.w-4 {
+  inline-size: 4ch;
+}
+
+:is(al-point-visualization:hover, al-point-visualization:focus-within) .shrink.w-5 {
+  inline-size: 5ch;
+}
+
+:is(al-point-visualization:hover, al-point-visualization:focus-within) .shrink.w-6 {
+  inline-size: 6ch;
+}
+
 /* For the raw UTF-8 bytes */
 .insignificant {
   transition: opacity 600ms;
