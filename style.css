@@ -27,7 +27,7 @@ input {
   display: block;
   background: hsl(222deg 50% 95%);
   color: hsl(222deg 50% 10%);
-  inline-size: 4rem;
+  inline-size: 6rem;
   block-size: 4rem;
   margin-inline: auto;
   margin-block-end: 8px;
@@ -35,6 +35,7 @@ input {
   border-radius: 4px;
   border: none;
   font-size: 3rem;
+  text-align: center;
   transition: filter 800ms;
 }
 
