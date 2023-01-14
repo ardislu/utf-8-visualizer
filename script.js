@@ -88,9 +88,14 @@ function render(output) {
 }
 
 function handleChange(value) {
+  // Update URL with the input but do not spam the history
+  const url = new URL(`?q=${value}`, window.location.origin);
+  window.history.replaceState({}, '', url);
+
   const output = calculateOutput(value);
   render(output);
 }
 
 input.addEventListener('input', e => handleChange(e.target.value));
+input.value = new URL(document.location).searchParams.get('q') ?? '🏴‍☠️';
 handleChange(input.value); // Render the default value on first load
