@@ -91,6 +91,7 @@ function handleChange(value) {
   // Update URL with the input but do not spam the history
   const url = new URL(`?q=${value}`, window.location.origin);
   window.history.replaceState({}, '', url);
+  document.title = `utf-8-visualizer: ${value}`;
 
   const output = calculateOutput(value);
   render(output);
