@@ -50,27 +50,12 @@
         padding: 4px;
         animation: 800ms fadeIn both;
         transition: filter 800ms;
-        position: relative;
       }
 
       :host(:hover),
       :host(:focus-within) {
         filter: drop-shadow(0 0 4px hsl(222deg 50% 50%));
         transition: filter 400ms;
-      }
-      
-      :host::before {
-        content: "\a Unicode code point \a Code point in binary \a UTF-8";
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translateX(calc(-100% - 8px));
-        white-space: pre;
-        display: none;
-      }
-
-      :is(:host(:hover), :host(:focus-within))::before {
-        display: block;
       }
 
       ::slotted(*) {
