@@ -70,6 +70,8 @@ a:focus-within {
 }
 
 a>svg {
+  inline-size: 24px;
+  block-size: 24px;
   transition: transform 600ms;
 }
 
