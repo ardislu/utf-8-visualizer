@@ -55,6 +55,11 @@ div#visualizations {
 }
 
 a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+a#github {
   line-height: 0;
   background: hsl(222deg 50% 30%);
   color: hsl(222deg 50% 95%);
@@ -63,19 +68,19 @@ a {
   transition: filter 800ms;
 }
 
-a:hover,
-a:focus-within {
+a#github:hover,
+a#github:focus-within {
   filter: brightness(120%) drop-shadow(0 0 4px hsl(222deg 50% 50%));
   transition: filter 400ms;
 }
 
-a>svg {
+a#github>svg {
   inline-size: 24px;
   block-size: 24px;
   transition: transform 600ms;
 }
 
-:is(a:hover, a:focus-within)>svg {
+:is(a#github:hover, a#github:focus-within)>svg {
   transform: translateY(-2px);
   transition: transform 200ms;
 }

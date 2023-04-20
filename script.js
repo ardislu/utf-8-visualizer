@@ -76,12 +76,12 @@ function render(output) {
 
   for (const item of output) {
     const viz = document.createElement('al-point-visualization');
-    viz.insertAdjacentHTML('beforeend', `<span slot="char">${item.char}</slot>`);
-    viz.insertAdjacentHTML('beforeend', `<span slot="point">${item.point}</slot>`);
+    viz.insertAdjacentHTML('beforeend', `<span slot="char">${item.char}</span>`);
+    viz.insertAdjacentHTML('beforeend', `<span slot="point"><a href="https://codepoints.net/${item.point}">${item.point}</a></span>`);
 
     const [pointBinary, bytes] = parseBytes(item.bytes);
-    viz.insertAdjacentHTML('beforeend', `<span slot="point-binary">${pointBinary}</slot>`);
-    viz.insertAdjacentHTML('beforeend', `<span slot="bytes">${bytes}</slot>`);
+    viz.insertAdjacentHTML('beforeend', `<span slot="point-binary">${pointBinary}</span>`);
+    viz.insertAdjacentHTML('beforeend', `<span slot="bytes">${bytes}</span>`);
 
     vizContainer.insertAdjacentElement('beforeend', viz);
   }
