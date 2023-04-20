@@ -85,6 +85,16 @@ a.icon-link>svg {
   transition: transform 200ms;
 }
 
+a:not(.icon-link) {
+  text-decoration: underline;
+  font-weight: 700;
+  color: hsl(222deg 80% 95% / 90%);
+}
+
+:is(a:not(.icon-link):hover, a:not(.icon-link):focus-within) {
+  text-decoration: none;
+}
+
 /* For the point binary */
 .shrink {
   display: inline-block;
