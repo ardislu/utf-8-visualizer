@@ -59,7 +59,7 @@ a {
   text-decoration: inherit;
 }
 
-a#github {
+a.icon-link {
   line-height: 0;
   background: hsl(222deg 50% 30%);
   color: hsl(222deg 50% 95%);
@@ -68,19 +68,19 @@ a#github {
   transition: filter 800ms;
 }
 
-a#github:hover,
-a#github:focus-within {
+a.icon-link:hover,
+a.icon-link:focus-within {
   filter: brightness(120%) drop-shadow(0 0 4px hsl(222deg 50% 50%));
   transition: filter 400ms;
 }
 
-a#github>svg {
+a.icon-link>svg {
   inline-size: 24px;
   block-size: 24px;
   transition: transform 600ms;
 }
 
-:is(a#github:hover, a#github:focus-within)>svg {
+:is(a.icon-link:hover, a.icon-link:focus-within)>svg {
   transform: translateY(-2px);
   transition: transform 200ms;
 }
