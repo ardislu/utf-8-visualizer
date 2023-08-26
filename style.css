@@ -52,6 +52,7 @@ div#visualizations {
   gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
+  isolation: isolate;
 }
 
 a {

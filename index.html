@@ -51,6 +51,8 @@
         padding: 4px;
         animation: 800ms fadeIn both;
         transition: filter 800ms;
+        --index-order: 1;
+        z-index: calc(var(--index-order) * var(--i));
       }
 
       :host(:hover),
@@ -63,18 +65,64 @@
         animation-name: slideIn, fadeIn;
         animation-duration: 800ms, 1600ms;
         animation-fill-mode: both;
+        position: relative;
+      }
+
+      ::slotted(*)::after {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, calc(-100% - 4px));
+        inline-size: max-content;
+        pointer-events: none;
+        padding: 4px;
+        border-radius: 4px;
+        background: hsl(216deg 50% 40% / 90%);
+        opacity: 0;
+        transition: opacity 400ms;
+      }
+
+      @media (min-width: 1440px) {
+        :host {
+          --index-order: -1;
+        }
+
+        ::slotted(*)::after {
+          left: unset;
+          transform: translate(8px, -4px);
+        }
+      }
+
+      ::slotted(*:hover)::after {
+        opacity: 1;
+      }
+
+      ::slotted([slot="char"])::after {
+        content: "Visualization";
+        transition: opacity 200ms;
       }
 
       ::slotted([slot="point"]) {
         animation-delay: 100ms;
       }
 
+      ::slotted([slot="point"])::after {
+        content: "Codepoint (hex)";
+      }
+
       ::slotted([slot="point-binary"]) {
         animation-delay: 200ms;
       }
 
+      ::slotted([slot="point-binary"])::after {
+        content: "Codepoint (binary)"
+      }
+
       ::slotted([slot="bytes"]) {
         animation-delay: 300ms;
+      }
+
+      ::slotted([slot="bytes"])::after {
+        content: "UTF-8"
       }
     </style>
 

@@ -74,6 +74,7 @@ function render(output) {
   const vizContainer = document.getElementById('visualizations');
   vizContainer.innerHTML = '';
 
+  let i = 1;
   for (const item of output) {
     const viz = document.createElement('al-point-visualization');
     viz.insertAdjacentHTML('beforeend', `<span slot="char">${item.char}</span>`);
@@ -82,6 +83,11 @@ function render(output) {
     const [pointBinary, bytes] = parseBytes(item.bytes);
     viz.insertAdjacentHTML('beforeend', `<span slot="point-binary">${pointBinary}</span>`);
     viz.insertAdjacentHTML('beforeend', `<span slot="bytes">${bytes}</span>`);
+
+    // Set a CSS variable to dynamically switch z-index stacking order
+    // when required, so the hover popovers stay on top.
+    viz.style.setProperty('--i', i);
+    i++;
 
     vizContainer.insertAdjacentElement('beforeend', viz);
   }
