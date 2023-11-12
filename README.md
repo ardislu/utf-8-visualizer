@@ -1,4 +1,4 @@
-# utf-8-visualizer
+# UTF-8 Visualizer
 
 A tool to visualize how Unicode code points get encoded into UTF-8.
 
