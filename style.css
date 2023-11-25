@@ -96,6 +96,11 @@ a:not(.icon-link) {
   text-decoration: none;
 }
 
+:not(input)::selection {
+  color: hsl(222deg 50% 30%);
+  background-color: hsl(58deg 80% 90%);
+}
+
 /* For the point binary */
 .shrink {
   display: inline-block;
