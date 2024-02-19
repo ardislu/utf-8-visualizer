@@ -78,12 +78,12 @@ a.icon-link:focus-within {
 a.icon-link>svg {
   inline-size: 24px;
   block-size: 24px;
-  transition: transform 600ms;
+  transition: translate 600ms;
 }
 
 :is(a.icon-link:hover, a.icon-link:focus-within)>svg {
-  transform: translateY(-2px);
-  transition: transform 200ms;
+  translate: 0 -2px;
+  transition: translate 200ms;
 }
 
 a:not(.icon-link) {
@@ -149,11 +149,11 @@ a:not(.icon-link) {
 /* These keyframes are used in the al-point-visualization template styling, but must be declared globally */
 @keyframes slideIn {
   from {
-    transform: translateY(-100%);
+    translate: 0 -100%;
   }
 
   to {
-    transform: translateY(0);
+    translate: 0;
   }
 }
 
