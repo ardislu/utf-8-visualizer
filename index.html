@@ -51,12 +51,28 @@
         transition: filter 800ms;
         --index-order: 1;
         z-index: calc(var(--index-order) * var(--i));
+        counter-increment: n;
+        position: relative;
       }
 
       :host(:hover),
       :host(:focus-within) {
         filter: drop-shadow(0 0 4px hsl(222deg 50% 50%));
         transition: filter 400ms;
+
+        &::before {
+          opacity: 1;
+          transition: opacity 200ms;
+        }
+      }
+
+      :host::before {
+        content: counter(n);
+        position: absolute;
+        left: 6px;
+        top: 2px;
+        opacity: 0.6;
+        transition: opacity 400ms;
       }
 
       ::slotted(*) {
