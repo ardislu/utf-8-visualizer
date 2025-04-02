@@ -96,7 +96,8 @@ function handleChange(value) {
 
 const input = document.querySelector('input');
 input.addEventListener('input', e => handleChange(e.target.value));
-input.value = new URL(document.location).searchParams.get('q') ?? '🏴‍☠️';
+const q = new URL(document.location).searchParams.get('q');
+input.value = (q === null || q === '') ? '🏴‍☠️' : q;
 handleChange(input.value); // Render the default value on first load
 
 addEventListener('keyup', e => {
