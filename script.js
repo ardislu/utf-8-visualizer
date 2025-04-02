@@ -98,3 +98,7 @@ const input = document.querySelector('input');
 input.addEventListener('input', e => handleChange(e.target.value));
 input.value = new URL(document.location).searchParams.get('q') ?? '🏴‍☠️';
 handleChange(input.value); // Render the default value on first load
+
+addEventListener('keyup', e => {
+  if (e.key === '/') { input.focus(); }
+});
