@@ -96,7 +96,7 @@ a:not(.icon-link) {
   text-decoration: none;
 }
 
-:not(input)::selection {
+#visualizations::selection {
   color: hsl(222deg 50% 30%);
   background-color: hsl(58deg 80% 90%);
 }
