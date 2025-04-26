@@ -96,7 +96,7 @@ a:not(.icon-link) {
   text-decoration: none;
 }
 
-#visualizations::selection {
+:is(#visualizations, #count)::selection {
   color: hsl(222deg 50% 30%);
   background-color: hsl(58deg 80% 90%);
 }
@@ -173,4 +173,11 @@ a:not(.icon-link) {
   to {
     opacity: 1;
   }
+}
+
+#count {
+  text-align: center;
+  margin-block: 1ch;
+  font-family: ui-monospace, monospace;
+  font-size: 1rem;
 }
