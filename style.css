@@ -1,5 +1,5 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+  font-family: system-ui, sans-serif;
   background: radial-gradient(circle at 50% 150px, hsl(222deg 50% 25%) 5%, hsl(222deg 50% 10%));
   color: hsl(222deg 50% 95%);
   min-block-size: 100dvb;
