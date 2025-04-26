@@ -108,11 +108,15 @@ a:not(.icon-link) {
   line-height: 0;
   overflow: hidden;
   visibility: hidden;
-  transition: inline-size 600ms;
+  transition: inline-size 600ms, margin 600ms;
 }
 
 :is(al-point-visualization:hover, al-point-visualization:focus-within) .shrink {
-  transition: inline-size 200ms;
+  transition: inline-size 200ms, margin 200ms;
+
+  &:not(:first-child) {
+    margin-inline-start: 1ch;
+  }
 }
 
 /* Can't use inline-size: fit-content or inline-size: auto, must hardcode a concrete size for transition to work. */
@@ -139,6 +143,10 @@ a:not(.icon-link) {
 /* For the raw UTF-8 bytes */
 .insignificant {
   transition: opacity 600ms;
+
+  &:not(:first-child) {
+    margin-inline-start: 1ch;
+  }
 }
 
 :is(al-point-visualization:hover, al-point-visualization:focus-within) .insignificant {
