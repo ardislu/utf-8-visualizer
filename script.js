@@ -4,8 +4,7 @@ const invisibleCharacters = [9, 10, 11, 12, 13, 32, 127, 160, 173, 847, 1564, 44
 const encoder = new TextEncoder();
 
 customElements.define('al-point-visualization', class extends HTMLElement {
-  constructor() {
-    super();
+  connectedCallback() {
     const template = document.querySelector('template').content;
     const shadowRoot = this.attachShadow({ mode: 'open' });
     shadowRoot.appendChild(template.cloneNode(true));
