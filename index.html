@@ -49,7 +49,7 @@
         border-radius: 4px;
         padding: 4px;
         animation: 800ms fadeIn both;
-        transition: filter 800ms;
+        transition: filter 800ms, border-color 600ms;
         --index-order: 1;
         z-index: calc(var(--index-order) * var(--i));
         counter-increment: n;
@@ -59,7 +59,8 @@
       :host(:hover),
       :host(:focus-within) {
         filter: drop-shadow(0 0 4px hsl(222deg 50% 50%));
-        transition: filter 400ms;
+        border-color: hsl(222deg 45% 55%);
+        transition: filter 400ms, border-color 200ms;
 
         &::before {
           opacity: 1;
